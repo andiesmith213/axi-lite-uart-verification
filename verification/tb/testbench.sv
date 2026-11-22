@@ -2,6 +2,12 @@
 module testbench;
     //Clock and reset generation
     logic clk, rst;
+    assign #5 clk = !clk;
+
+    initial begin
+        rst = 1;
+        #5 rst = 0;
+    end
     
 
     //Connect DUT to environment via virtual interface
@@ -9,8 +15,8 @@ module testbench;
 
     //Instantiate DUT
     axiluart DUT (    
-            .S_AXI_ACLK (),
-            .S_AXI_ARESETN (),
+            .S_AXI_ACLK (clk),
+            .S_AXI_ARESETN (rst),
             .S_AXI_AWVALID (),
             .S_AXI_AWREADY (),
             .S_AXI_AWADDR (),
