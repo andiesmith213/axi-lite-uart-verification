@@ -3,7 +3,14 @@
 This project verifies an open source AXI-Lite based UART utilizing UVM verification methodology.
 
 # Status
-Verification plan-- in progress
+- [] Verification plan — <sub><strong>In progress</strong></sub>
+- [] Environment setup — <sub><strong>In progress</strong></sub>
+
+# Cloning this repo
+Due to this project verifying separate open source hardware, the RTL is pulled in as a submodule. Therefore, when cloning this repo, use the --recurse-submodules argument to pull in the UART repo under the "hw" directory. 
+> ```bash
+> git clone --recurse-submodules https://github.com/andiesmith213/axi-lite-uart-verification
+> ```
 
 # Project Setup
 ## 1. Initialize virtual environment (recommended)
@@ -19,7 +26,12 @@ This project utilizes the open-source simulation tool: Verilator. Any user looki
 > cd path-where-verilator-install
 > git clone https://github.com/verilator/verilator
 > ```
-## 2. Set environment variables
+## 3. Instantiating git submodule (if not completed already)
+If this project was cloned without pulling in the submodule, initialize the submodule now.
+> ```bash
+> git submodule update --init --recursive
+> ```
+## 4. Set environment variables
 The make script needs to know where the verilator git repo exists on your computer to build all the dependencies. Therefore, the user needs to set an environment variable called VERILATOR_PATH. Additionally, to run simulations, the sim script needs to know the path to the repo
 >```bash 
 > #bash
