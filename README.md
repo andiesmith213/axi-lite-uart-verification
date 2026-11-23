@@ -23,7 +23,7 @@ To prevent errors caused by version differences, it's recommended to create a vi
 ## 2. Installing Verilator (if not installed already)
 This project utilizes the open-source simulation tool: Verilator. Any user looking to actually run simulations needs to clone the verilator git repo onto their computer if they haven't done so already. 
 > ```bash
-> cd path-where-verilator-install
+> cd path-where-verilator-install-desired
 > git clone https://github.com/verilator/verilator
 > ```
 ## 3. Instantiating git submodule (if not completed already)
