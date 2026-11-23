@@ -46,4 +46,7 @@ module testbench;
             .o_uart_txfifo_int ()   //irq
     );
 
+    initial begin
+        $dumpfile("dump.vcd"); $dumpvars;
+    end
 endmodule
