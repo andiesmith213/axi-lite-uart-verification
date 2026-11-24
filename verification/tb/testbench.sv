@@ -1,7 +1,15 @@
 
+
 module testbench;
+    //import UVM packages and macros
+    import uvm_pkg::*
+    `include "uvm_macros.svh"
+
+    //import environment & uart package here
+
     //Clock and reset generation
-    logic clk, rst;
+    logic clk; 
+    bit rst;
     assign #5 clk = !clk;
 
     initial begin
@@ -46,7 +54,15 @@ module testbench;
             .o_uart_txfifo_int ()   //irq
     );
 
+    //dump waveforms
     initial begin
         $dumpfile("dump.vcd"); $dumpvars;
     end
+
+    //incude and run tests
+    `include "test_lib.sv"
+    initial begin
+        run_test("basic_sanity_check");
+    end
+
 endmodule
