@@ -32,16 +32,18 @@ If this project was cloned without pulling in the submodule, initialize the subm
 > git submodule update --init --recursive
 > ```
 ## 4. Set environment variables and build
-The build script needs to know where the verilator git repo exists on your computer to build all the dependencies. Therefore, the user needs to set a few environment variables.
+The build script needs to know where verilator, UVM and this repository exist on your computer to build all the dependencies. Therefore, the user needs to set a few environment variables.
 First, add the paths from your computer to the set_env_var.sh file. 
 > VERILATOR_PATH = the path from your computer to where your verilator repo was cloned
 > REPO_ROOT = the path from your computer to where this repo is cloned
 > UVM_HOME = the path from your computer to where the "src" directory is, likely under "uvm-core-[date of release]"
 Then run this command:
 >```bash 
-> #bash
 > source build.sh
 >```
 
 # Simulating
-
+If the build.sh was successful, the path within axi-lite-uart-verification was added to the shell's PATH variable. Therefore, as long as the build completed successfully, you can run the command below from any directory. This will compile and simulate the provided test. 
+>```bash
+> sim.sh [test-name]
+>```
