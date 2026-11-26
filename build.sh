@@ -1,20 +1,24 @@
 #!/bin/bash
 
+#Declare global variable to check environment variables were correctly delcared
+env_successful=0
+
 function check_env {
-    #TODO: source set_env script
-    #FIXME: this should check that the directories are actually there, not just that the variable is not empty
+    source set_env_var.sh
     #check that environment variables were set. If not, stop execution
-    if [ -z $VERILATOR_PATH ] || [ -z $REPO_ROOT ] || [ -z $UVM_HOME ]; then 
-        echo "Exiting script; one or more environment variables was not set"
-        return 0 
-    fi
+    for var in VERILATOR_PATH REPO_ROOT UVM_HOME; do
+        path=${!var-}
+        if [[ -z "$path" || ! -d "$path" ]]; then
+            printf 'Error: %s is unset, empty, or not a directory: %s\n' "$var" "$path" >&2
+            env_successful=0
+        else env_successful=1
+        fi
+    done
 }
 
 #building Verilator
 function build_verilator {
     export VERILATOR_VERSION=5.054
-    echo $VERILATOR_PATH
-    echo $VERILATOR_VERSION
     unset VERILATOR_ROOT
     cd $VERILATOR_PATH
     git checkout v$(VERILATOR_VERSION)
@@ -35,15 +39,17 @@ function check_install {
     fi
 }
 
+#Run check_env function to see if other functions should be run
 check_env
 
-build_verilator
+if [ $env_successful -eq 1 ]; then
+    build_verilator
+    check_install
 
-check_install
+    #Appending scripts to PATH variable for easier simulation
+    export PATH=$PATH:$REPO_ROOT/verification/scripts
 
-#Appending scripts to PATH variable for easier simulation
-export PATH=$PATH:$REPO_ROOT/verification/scripts
-
-echo "******************************"
-echo "*     Build Complete         *"
-echo "******************************"
+    echo "******************************"
+    echo "*     Build Complete         *"
+    echo "******************************"
+fi
