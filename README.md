@@ -32,7 +32,7 @@ If this project was cloned without pulling in the submodule, initialize the subm
 > git submodule update --init --recursive
 > ```
 ## 4. Set environment variables
-The make script needs to know where the verilator git repo exists on your computer to build all the dependencies. Therefore, the user needs to set an environment variable called VERILATOR_PATH. Additionally, to run simulations, the sim script needs to know the path to the repo and where UVM is installed on your computer.
+The build script that is run in the next step needs to know where the verilator git repo exists on your computer to build all the dependencies. Therefore, the user needs to set an environment variable called VERILATOR_PATH. Additionally, to run simulations, the sim script needs to know the path to the repo and where UVM is installed on your computer.
 >```bash 
 > #bash
 > export VERILATOR_PATH="from-root-to-path/verilator"
@@ -44,10 +44,10 @@ The make script needs to know where the verilator git repo exists on your comput
 > setenv REPO_ROOT from-root-to-path/axi-lite-uart-verification
 > setenc UVM_HOME uvm-install-directory #this should point to the directory that contains the uvm src folder 
 >```
-## 3. Run make
-Once the environment variables are set, you are ready to run the make script. This will build Verilator using a set version, check that the installation was successful, and run a sanity check test to confirm everything is set up properly (if Verilator installation successful). 
+## 3. Run build script
+Once the environment variables are set, you are ready to run the build script. This will build Verilator using a set version, check that the installation was successful, and run a sanity check test to confirm everything is set up properly (if Verilator installation successful). 
 > ```bash 
-> make
+> source build.sh
 > ```
 # Simulating
 
